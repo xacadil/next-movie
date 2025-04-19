@@ -10,15 +10,19 @@ export default function MovieCard({ movie }: { movie: Movie }) {
         <Link href={`/movies/${movie.id}`}> 
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition transform duration-300 hover:scale-[1.02] hover:shadow-md hover:border-blue-300">
 
-            <Link href={`/movies/${movie.id}`}>
+            
                 <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.poster_path}`}
                     alt={movie.title}
                     width={400}
                     height={600}
                     className="object-cover transition-transform duration-300 group-hover:scale-105"
+                    loading="lazy"
+                    placeholder="blur"
+                    blurDataURL="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mP8/5+hHgAGgwJ/lqtBkQAAAABJRU5ErkJggg=="
+
                 />
-            </Link>
+            
             <div className="p-5">
                 
                     <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
@@ -39,8 +43,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                         {movie.vote_average.toFixed(1)}
                     </span>
                 </div>
-                <Link
-                    href={`/movies/${movie.id}`}
+                <div
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800"
                 >
                     Read more
@@ -58,7 +61,7 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                             d="M1 5h12m0 0L9 1m4 4L9 9"
                         />
                     </svg>
-                </Link>
+                </div>
             </div>
         </div>
         </Link>
