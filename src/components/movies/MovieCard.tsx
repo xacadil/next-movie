@@ -3,30 +3,42 @@
 import { Movie } from "@/types/movie";
 import Image from "next/image";
 import Link from "next/link";
+import { Star } from 'lucide-react';
 
 export default function MovieCard({ movie }: { movie: Movie }) {
     return (
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden">
+        <Link href={`/movies/${movie.id}`}> 
+        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition transform duration-300 hover:scale-[1.02] hover:shadow-md hover:border-blue-300">
+
             <Link href={`/movies/${movie.id}`}>
                 <Image
                     src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.poster_path}`}
                     alt={movie.title}
                     width={400}
                     height={600}
-                    className="rounded-t-lg w-full h-[300px] object-cover"
+                    className="object-cover transition-transform duration-300 group-hover:scale-105"
                 />
             </Link>
             <div className="p-5">
-                <Link href={`/movies/${movie.id}`}>
+                
                     <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
                         {movie.title}
                     </h5>
-                </Link>
+                
                 <p className="mb-3 text-sm text-gray-700">
                     {movie.overview.length > 100
                         ? movie.overview.slice(0, 100) + "..."
                         : movie.overview}
                 </p>
+                <div className="flex items-center gap-1 mb-2">
+                    {/* Star Icon */}
+                    <Star className="w-5 h-5 text-yellow-400" fill="currentColor" />
+                    &nbsp;
+                    {/* Rating Number */}
+                    <span className="text-sm font-medium text-gray-800">
+                        {movie.vote_average.toFixed(1)}
+                    </span>
+                </div>
                 <Link
                     href={`/movies/${movie.id}`}
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800"
@@ -49,5 +61,6 @@ export default function MovieCard({ movie }: { movie: Movie }) {
                 </Link>
             </div>
         </div>
+        </Link>
     );
 }
