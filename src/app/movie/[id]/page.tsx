@@ -1,3 +1,5 @@
+import ActorList from "@/components/movies/ActorList";
+import Gallery from "@/components/movies/Gallery";
 import {
     getMovieDetails,
     getMovieCredits,
@@ -15,7 +17,6 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
 
     if (!movie) return notFound();
 
-    const topCast = cast.slice(0, 5);
 
     return (
         <div className="max-w-6xl mx-auto px-4 py-8">
@@ -45,47 +46,11 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
             </div>
 
             {/* Cast Section */}
-            <div className="mt-10">
-                <h2 className="text-xl font-bold mb-4">Top Cast</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-4">
-                    {topCast.map((actor: any) => (
-                        <div key={actor.id} className="text-center">
-                            <Image
-                                src={
-                                    actor.profile_path
-                                        ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${actor.profile_path}`
-                                        : "/images/fallback.jpg"
-                                }
-                                alt={actor.name}
-                                width={150}
-                                height={225}
-                                className="rounded shadow"
-                            />
-                            <p className="text-sm font-medium mt-2">{actor.name}</p>
-                            <p className="text-xs text-gray-500">{actor.character}</p>
-                        </div>
-                    ))}
-                </div>
-                {/* Client-side "Show More" toggle will go here (optional enhancement) */}
-            </div>
+            <ActorList actors={cast} />
 
             {/* Images Section */}
-            <div className="mt-10">
-                <h2 className="text-xl font-bold mb-4">Gallery</h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
-                    {images.slice(0, 8).map((img: any, index: number) => (
-                        <Image
-                            key={index}
-                            src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${img.file_path}`}
-                            alt={`Backdrop ${index + 1}`}
-                            width={300}
-                            height={169}
-                            className="rounded shadow object-cover h-[169px] w-full"
-                        />
-                    ))}
-                </div>
-                {/* Later: Add click-to-zoom or modal viewer */}
-            </div>
+            <Gallery backdrops={images} />
+        
         </div>
     );
 }
