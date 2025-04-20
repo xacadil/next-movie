@@ -1,13 +1,27 @@
-// app/page.tsx
+"use client";
 
 import MovieList from "@/components/movies/MovieList";
-import { mockMovies } from "@/mock/movies";
+import { useMovieStore } from "@/lib/store";
+import { useEffect } from "react";
+import { discoverMovies } from "@/lib/tmdb";
 
-export default function Home() {
+export default function HomePage() {
+  const { movies, setMovies, loading } = useMovieStore();
+
+  // Fetch default movies only once on load
+  useEffect(() => {
+    const init = async () => {
+      const data = await discoverMovies({ sort_by: "popularity.desc" });
+      setMovies(data.results);
+    };
+
+    if (movies.length === 0) init();
+  }, [movies.length]);
+
   return (
-    <div>
-      <h1 className="text-2xl font-semibold mb-6 text-gray-800">Latest Movies</h1>
-      <MovieList movies={mockMovies} />
+    <div className="max-w-7xl mx-auto px-4 py-6">
+      {loading && <p className="text-gray-500">Loading...</p>}
+      {!loading && <MovieList movies={movies} />}
     </div>
   );
 }
