@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import { Movie } from "@/types/movie";
 
-type SortType = "popular" | "now_playing" | "top_rated" | "upcoming";
+type SortType = "popular" | "release_year_asc" | "top_rated" | "release_year_desc";
 
 interface MovieStore {
     searchQuery: string;

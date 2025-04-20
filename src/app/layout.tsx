@@ -6,6 +6,8 @@ import "./globals.css";
 import Header from "@/components/layout/Header";
 // import stylesheet if you're not already using CSS @import
 import "react-image-gallery/styles/css/image-gallery.css";
+import "react-loading-skeleton/dist/skeleton.css";
+
 
 const geistSans = Geist({
   variable: "--font-geist-sans",

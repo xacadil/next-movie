@@ -16,7 +16,7 @@ export async function discoverMovies(options = {}) {
     const params = new URLSearchParams({
         language: "en-US",
         include_adult: "false",
-        sort_by: "popularity.desc",
+        sort_by: "primary_release_date.desc",
         page: "1",
         ...options,
     });

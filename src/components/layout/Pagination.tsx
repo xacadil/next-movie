@@ -21,7 +21,7 @@ export default function Pagination() {
                     <nav className="isolate inline-flex -space-x-px rounded-md shadow-xs" aria-label="Pagination">
                         <button
                             onClick={() => setPage(Math.max(page - 1, 1))}
-                            className="relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 hover:bg-gray-50"
+                            className="cursor-pointer relative inline-flex items-center rounded-l-md px-2 py-2 text-gray-400 ring-1 ring-gray-300 hover:bg-gray-50"
                         >
                             <span className="sr-only">Previous</span>
                             &#8592;
@@ -30,7 +30,7 @@ export default function Pagination() {
                             <button
                                 key={p}
                                 onClick={() => setPage(p)}
-                                className={`relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-gray-300 ${p === page ? "bg-indigo-600 text-white" : "text-gray-900 hover:bg-gray-50"
+                                className={`cursor-pointer relative inline-flex items-center px-4 py-2 text-sm font-semibold ring-1 ring-gray-300 ${p === page ? "bg-indigo-600 text-white" : "text-gray-900 hover:bg-gray-50"
                                     }`}
                             >
                                 {p}

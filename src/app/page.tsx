@@ -1,11 +1,12 @@
 "use client";
 
 import { useMovieStore } from "@/lib/store";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { searchMovies, discoverMovies } from "@/lib/tmdb";
 import MovieList from "@/components/movies/MovieList";
 import Pagination from "@/components/layout/Pagination";
 import SortButtonGroup from "@/components/layout/SortButtonGroup";
+import MovieCardSkeleton from "@/components/movies/MovieCardSkeleton";
 
 export default function HomePage() {
   const {
@@ -20,6 +21,8 @@ export default function HomePage() {
     sortType,
   } = useMovieStore();
 
+  const [shouldShowSkeleton, setShouldShowSkeleton] = useState(true);
+
   useEffect(() => {
     const fetchMovies = async () => {
       setLoading(true);
@@ -30,11 +33,13 @@ export default function HomePage() {
           sort_by:
             sortType === "popular"
               ? "popularity.desc"
-              : sortType === "now_playing"
-                ? "release_date.desc"
-                : sortType === "top_rated"
-                  ? "vote_average.desc"
-                  : "release_date.asc",
+              : sortType === "top_rated"
+                ? "vote_average.desc"
+                : sortType === "release_year_asc"
+                  ? "primary_release_date.asc"
+                  : sortType === "release_year_desc"
+                    ? "primary_release_date.desc"
+                    : "popularity.desc", //
           page,
         });
 
@@ -46,10 +51,34 @@ export default function HomePage() {
     fetchMovies();
   }, [searchQuery, sortType, page]);
 
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (loading) {
+      setShouldShowSkeleton(true);
+    } else {
+      timeout = setTimeout(() => {
+        setShouldShowSkeleton(false);
+      }, 200); // Delay before hiding skeletons
+    }
+
+    return () => clearTimeout(timeout);
+  }, [loading]);
+
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
       <SortButtonGroup />
-      {loading ? <p>Loading...</p> : <MovieList movies={movies} />}
+
+      {shouldShowSkeleton ? (
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, i) => (
+            <MovieCardSkeleton key={i} />
+          ))}
+        </div>
+      ) : (
+        <MovieList movies={movies} />
+      )}
+
       <Pagination />
     </div>
   );
