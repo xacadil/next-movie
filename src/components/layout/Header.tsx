@@ -3,10 +3,12 @@
 import { useMovieStore } from "@/lib/store";
 import { searchMovies, discoverMovies } from "@/lib/tmdb";
 import { ChangeEvent, useEffect } from "react";
-import Link from "next/link";
-import { Film } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
 
 export default function Header() {
+    const router = useRouter();
+    const pathname = usePathname();
+
     const { searchQuery, setSearchQuery, setMovies, setLoading } = useMovieStore();
 
     useEffect(() => {
@@ -21,7 +23,7 @@ export default function Header() {
 
         const delayDebounce = setTimeout(() => {
             fetchMovies();
-        }, 400); // debounce delay
+        }, 400);
 
         return () => clearTimeout(delayDebounce);
     }, [searchQuery, setMovies]);
@@ -29,18 +31,20 @@ export default function Header() {
     return (
         <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-blue-600 transition">
-                    <Film className="w-6 h-6" />
-                    <span>Next Movie</span>
-                </Link>
+                <span className="text-xl font-bold text-gray-800">Next Movie</span>
                 <input
                     type="text"
                     placeholder="Search..."
                     className="border p-2 rounded-md w-full max-w-md"
                     value={searchQuery}
-                    onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                        setSearchQuery(e.target.value)
-                    }
+                    onChange={(e: ChangeEvent<HTMLInputElement>) => {
+                        const value = e.target.value;
+                        setSearchQuery(value);
+
+                        if (pathname !== "/") {
+                            router.push("/");
+                        }
+                    }}
                 />
             </div>
         </header>
