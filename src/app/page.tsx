@@ -1,27 +1,56 @@
 "use client";
 
-import MovieList from "@/components/movies/MovieList";
 import { useMovieStore } from "@/lib/store";
 import { useEffect } from "react";
-import { discoverMovies } from "@/lib/tmdb";
+import { searchMovies, discoverMovies } from "@/lib/tmdb";
+import MovieList from "@/components/movies/MovieList";
+import Pagination from "@/components/layout/Pagination";
+import SortButtonGroup from "@/components/layout/SortButtonGroup";
 
 export default function HomePage() {
-  const { movies, setMovies, loading } = useMovieStore();
+  const {
+    searchQuery,
+    movies,
+    setMovies,
+    loading,
+    setLoading,
+    page,
+    totalPages,
+    setTotalPages,
+    sortType,
+  } = useMovieStore();
 
-  // Fetch default movies only once on load
   useEffect(() => {
-    const init = async () => {
-      const data = await discoverMovies({ sort_by: "popularity.desc" });
-      setMovies(data.results);
+    const fetchMovies = async () => {
+      setLoading(true);
+
+      const res = searchQuery
+        ? await searchMovies(searchQuery, page)
+        : await discoverMovies({
+          sort_by:
+            sortType === "popular"
+              ? "popularity.desc"
+              : sortType === "now_playing"
+                ? "release_date.desc"
+                : sortType === "top_rated"
+                  ? "vote_average.desc"
+                  : "release_date.asc",
+          page,
+        });
+
+      setMovies(res.results);
+      setTotalPages(res.total_pages);
+      setLoading(false);
     };
 
-    if (movies.length === 0) init();
-  }, [movies.length]);
+    fetchMovies();
+  }, [searchQuery, sortType, page]);
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-6">
-      {loading && <p className="text-gray-500">Loading...</p>}
-      {!loading && <MovieList movies={movies} />}
+      <SortButtonGroup />
+      {loading ? <p>Loading...</p> : <MovieList movies={movies} />}
+      <Pagination />
     </div>
   );
 }

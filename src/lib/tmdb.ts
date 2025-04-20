@@ -47,3 +47,41 @@ export async function searchMovies(query: string, page = 1) {
 
     return response.json();
 }
+
+export async function getMovieDetails(id: string) {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
+        headers: {
+            Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+        },
+        next: { revalidate: 60 },
+    });
+
+    if (!res.ok) return null;
+    return res.json();
+}
+
+export async function getMovieCredits(id: string) {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/credits`, {
+        headers: {
+            Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+        },
+        next: { revalidate: 60 },
+    });
+
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.cast || [];
+}
+
+export async function getMovieImages(id: string) {
+    const res = await fetch(`https://api.themoviedb.org/3/movie/${id}/images`, {
+        headers: {
+            Authorization: `Bearer ${process.env.TMDB_ACCESS_TOKEN}`,
+        },
+        next: { revalidate: 60 },
+    });
+
+    if (!res.ok) return [];
+    const data = await res.json();
+    return data.backdrops || [];
+}

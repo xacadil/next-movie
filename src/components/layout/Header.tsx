@@ -3,6 +3,8 @@
 import { useMovieStore } from "@/lib/store";
 import { searchMovies, discoverMovies } from "@/lib/tmdb";
 import { ChangeEvent, useEffect } from "react";
+import Link from "next/link";
+import { Film } from "lucide-react";
 
 export default function Header() {
     const { searchQuery, setSearchQuery, setMovies, setLoading } = useMovieStore();
@@ -27,7 +29,10 @@ export default function Header() {
     return (
         <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                <span className="text-xl font-bold text-gray-800">Next Movie</span>
+                <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-blue-600 transition">
+                    <Film className="w-6 h-6" />
+                    <span>Next Movie</span>
+                </Link>
                 <input
                     type="text"
                     placeholder="Search..."

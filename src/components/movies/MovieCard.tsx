@@ -6,13 +6,19 @@ import Link from "next/link";
 import { Star } from 'lucide-react';
 
 export default function MovieCard({ movie }: { movie: Movie }) {
+    const poster = movie.poster_path
+        ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.poster_path}`
+        : "/fallback.png"; //fallback image
+    //few movies don't have average ratings
+    const ratings = movie.vote_average ? movie.vote_average.toFixed(1) : false;
+
     return (
-        <Link href={`/movies/${movie.id}`}> 
-        <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition transform duration-300 hover:scale-[1.02] hover:shadow-md hover:border-blue-300">
+        <Link href={`/movie/${movie.id}`}> 
+        <div title={movie.title} className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm overflow-hidden transition transform duration-300 hover:scale-[1.02] hover:shadow-md hover:border-blue-300">
 
             
                 <Image
-                    src={`${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.poster_path}`}
+                    src={`${poster}`}
                     alt={movie.title}
                     width={400}
                     height={600}
@@ -25,24 +31,27 @@ export default function MovieCard({ movie }: { movie: Movie }) {
             
             <div className="p-5">
                 
-                    <h5 className="mb-2 text-xl font-bold tracking-tight text-gray-900">
-                        {movie.title}
-                    </h5>
+                    <div className="flex items-start justify-between mb-2 gap-4">
+                        <h5 className="text-xl font-bold tracking-tight text-gray-900 w-1/2 truncate">
+                            {movie.title}
+                        </h5>
+                        {ratings && (
+                            <div className="flex items-center gap-1 shrink-0">
+                                <Star className="w-5 h-5 text-yellow-400" fill="currentColor" />
+                                <span className="text-sm font-medium text-gray-800">
+                                    {ratings}
+                                </span>
+                            </div>
+                        )}
+                    </div>
                 
                 <p className="mb-3 text-sm text-gray-700">
-                    {movie.overview.length > 100
-                        ? movie.overview.slice(0, 100) + "..."
+                    {movie.overview.length > 50
+                        ? movie.overview.slice(0, 50) + "..."
                         : movie.overview}
                 </p>
-                <div className="flex items-center gap-1 mb-2">
-                    {/* Star Icon */}
-                    <Star className="w-5 h-5 text-yellow-400" fill="currentColor" />
-                    &nbsp;
-                    {/* Rating Number */}
-                    <span className="text-sm font-medium text-gray-800">
-                        {movie.vote_average.toFixed(1)}
-                    </span>
-                </div>
+                   
+                
                 <div
                     className="inline-flex items-center px-3 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg hover:bg-blue-800"
                 >
