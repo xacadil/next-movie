@@ -8,14 +8,14 @@ export default function Header() {
     const { searchQuery, setSearchQuery, setMovies, setLoading } = useMovieStore();
 
     useEffect(() => {
-        const fetchMovies = async () => {
+        async function fetchMovies() {
             setLoading(true);
             const data = searchQuery
-                ? await searchMovies({ query: searchQuery })
+                ? await searchMovies(searchQuery)
                 : await discoverMovies({ sort_by: "popularity.desc" });
             setMovies(data.results);
             setLoading(false);
-        };
+        }
 
         const delayDebounce = setTimeout(() => {
             fetchMovies();
