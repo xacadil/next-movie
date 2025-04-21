@@ -15,3 +15,9 @@ export interface Movie {
     vote_average: number;
     vote_count: number;
 }
+
+export interface WatchlistItem {
+    id: number;
+    title: string;
+    poster_path?: string;
+}

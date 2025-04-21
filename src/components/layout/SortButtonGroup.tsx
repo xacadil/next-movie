@@ -25,9 +25,11 @@ const sortOptions = [
 ];
 
 export default function SortButtonGroup() {
-    const { sortType, setSortType } = useMovieStore();
+    const { sortType, setSortType,searchQuery } = useMovieStore();
 
     return (
+        <>
+        {searchQuery==="" &&
         <div className="flex flex-wrap gap-2 mb-6">
             {sortOptions.map(({ label, value }) => (
                 <button
@@ -41,6 +43,7 @@ export default function SortButtonGroup() {
                     {label}
                 </button>
             ))}
-        </div>
+        </div>}
+        </> 
     );
 }

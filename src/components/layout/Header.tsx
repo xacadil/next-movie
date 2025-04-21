@@ -7,20 +7,31 @@ import { ChangeEvent, useEffect } from "react";
 import { useDebounce } from "use-debounce";
 import { usePathname, useRouter } from "next/navigation";
 import { Film } from "lucide-react";
+import { useAuth } from "@/lib/hooks/useAuth";
+
+
 
 export default function Header() {
     const router = useRouter();
     const pathname = usePathname();
+    const { user, logout } = useAuth();
 
     const {
         searchQuery,
         setSearchQuery,
         setMovies,
         setLoading,
+        setPage,
     } = useMovieStore();
 
+    const handleLogoClick = () => {
+        setSearchQuery("");    // Clear the search
+        setPage(1);            // Optionally reset page
+        router.push("/");      // Navigate to homepage
+    };
+
     const [debouncedQuery] = useDebounce(searchQuery, 400);
-    const {setPage } = useMovieStore();
+
     useEffect(() => {
         async function fetchMovies() {
             setLoading(true);
@@ -38,10 +49,17 @@ export default function Header() {
     return (
         <header className="bg-white shadow-sm">
             <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-                <Link href="/" className="flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-blue-600 transition">
+                {/* Logo */}
+                <button
+                    
+                    onClick={handleLogoClick}   
+                    className="cursor-pointer flex items-center space-x-2 text-xl font-bold text-gray-800 hover:text-blue-600 transition"
+                >
                     <Film className="w-6 h-6" />
                     <span>Next Movie</span>
-                </Link>
+                </button>
+
+                {/* Search */}
                 <input
                     type="text"
                     placeholder="Search..."
@@ -57,6 +75,36 @@ export default function Header() {
                         }
                     }}
                 />
+
+                {/* Auth Links */}
+                <div className="flex items-center gap-4 ml-4">
+                    {user ? (
+                        <>
+                            <Link href="/watchlist" className="text-sm text-gray-800 hover:text-blue-600">
+                                Watchlist
+                            </Link>
+                            <button
+                                onClick={logout}
+                                className="text-sm text-red-600 hover:underline"
+                            >
+                                Sign Out
+                            </button>
+                        </>
+                    ) : (
+                        <>
+                            {pathname !== "/login" && (
+                                <Link href="/login" className="text-sm text-gray-800 hover:text-blue-600">
+                                    Login
+                                </Link>
+                            )}
+                            {pathname !== "/signup" && (
+                                <Link href="/signup" className="text-sm text-gray-800 hover:text-blue-600">
+                                    Signup
+                                </Link>
+                            )}
+                        </>
+                    )}
+                </div>
             </div>
         </header>
     );

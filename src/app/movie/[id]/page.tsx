@@ -18,6 +18,8 @@ import {
     Building2,
     PackageOpen,
 } from "lucide-react";
+import AddToWatchlist from "@/components/movies/AddToWatchlist";
+import Breadcrumb from "@/components/layout/BreadCrumb";
 
 export default async function MoviePage({ params }: { params: { id: string } }) {
     const [movie, cast, images] = await Promise.all([
@@ -30,7 +32,11 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
 
 
     return (
+        
+            
+        
         <div className="max-w-6xl mx-auto px-4 py-8">
+                <Breadcrumb currentTitle={movie.title} />
             {/* Movie Info */}
             <div className="flex flex-col md:flex-row gap-8 bg-gray-800 text-white p-8 border-b-amber-400 border-b-4">
                 <div className="w-full md:w-1/3">
@@ -50,6 +56,7 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
                 <div className="flex-1 space-y-4">
                     <h1 className="text-3xl font-bold text-yellow-500">{movie.title}</h1>
                     <p className="text-white ">{movie.overview}</p>
+                    <AddToWatchlist movie={{ id: movie.id, title: movie.title }} />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-white">
                         {movie.runtime && (
                             <p className="flex items-center gap-2">
@@ -119,5 +126,6 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
             <Gallery backdrops={images} />
         
         </div>
+        
     );
 }

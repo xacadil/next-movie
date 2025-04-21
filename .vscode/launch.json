@@ -38,7 +38,7 @@
                 "<node_internals>/**"
             ],
             "serverReadyAction": {
-                "action": "debugWithEdge",
+                "action": "openExternally",
                 "killOnServerStop": true,
                 "pattern": "- Local:.+(https?://.+)",
                 "uriFormat": "%s",
