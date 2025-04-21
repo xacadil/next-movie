@@ -1,3 +1,5 @@
+[🌐 Live Demo →](https://next-movie-bice.vercel.app)
+
 # 🎬 Next Movie - V1
 
 Welcome to **Next Movie**, a modern movie discovery app powered by **Next.js 15 (App Router)** and **Firebase**. This project enables users to browse popular and top-rated movies, perform live search queries, and manage a personal watchlist—all with a polished, fast-reacting interface using **Zustand**, **Tailwind CSS**, and **TypeScript**.
