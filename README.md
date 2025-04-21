@@ -1,36 +1,122 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🎬 Next Movie - V1
 
-## Getting Started
+Welcome to **Next Movie**, a modern movie discovery app powered by **Next.js 15 (App Router)** and **Firebase**. This project enables users to browse popular and top-rated movies, perform live search queries, and manage a personal watchlist—all with a polished, fast-reacting interface using **Zustand**, **Tailwind CSS**, and **TypeScript**.
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## 🚀 Features
+
+- 🔍 Live movie search with TMDb API
+- 🎞️ Movie detail pages with cast and image galleries
+- 🌟 Add/remove movies to/from personal watchlist
+- 🔐 Firebase Authentication (email/password)
+- 🧠 Optimistic updates via Zustand store
+- ✅ End-to-end tests with Playwright
+- ⚡ Dynamic breadcrumbs and responsive layout
+
+---
+
+## 🧱 Tech Stack
+
+- **Framework**: Next.js 15 (App Router)
+- **Styling**: Tailwind CSS
+- **State Management**: Zustand
+- **Database/Backend**: Firebase Firestore + Firebase Auth
+- **Testing**: Playwright
+- **Icons**: Lucide React
+- **Design System**: Flowbite-inspired Tailwind UI
+
+---
+
+## 🗂 Folder Structure
+
+```
+src/
+│
+├── app/                 # Next.js route-based structure
+│   ├── watchlist/       # Watchlist page (client-side)
+│   └── movies/[id]/     # Movie detail pages
+│
+├── components/          # Reusable UI components
+│   ├── movies/          # MovieCard, Gallery, ActorList, AddToWatchlist
+│   └── layout/          # Header, Breadcrumb, Pagination, etc.
+│
+├── lib/                 # Core utilities
+│   ├── firebase/        # Firebase config and Firestore helpers
+│   └── store.ts         # Zustand store for app state
+│
+├── types/               # Shared TypeScript types
+├── tests/               # Playwright tests
+└── public/images/       # Fallback images, logos, and static assets
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 🧪 Running Playwright Tests
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+To run the end-to-end tests:
 
-## Learn More
+```bash
+# Install Playwright and its dependencies
+npx playwright install
 
-To learn more about Next.js, take a look at the following resources:
+# Run all tests
+npx playwright test
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+# Open interactive UI test runner
+npx playwright test --ui
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Tests are located in `tests/` and cover:
+- Homepage rendering
+- Movie detail navigation
+- Search and filtering behavior
+- Watchlist interactions
 
-## Deploy on Vercel
+---
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+## ⚠️ Known Limitations
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- **Firestore Read/Write Delays**: Due to Firebase’s free tier, there may be initial latency (cold starts) when fetching or syncing data.
+- **No pagination in watchlist yet**: Only the first 50 movies are fetched on login.
+- **Optimistic UI**: Watchlist updates rely on cached store state; syncing issues may occur without error handling for network failures.
+- **Image blurring/loading**: Some images may appear pixelated due to poster size vs. card size. Optimization in progress.
+- **Missing notifications/toasts**: No feedback for success/failure actions (e.g., watchlist sync).
+
+---
+
+## 📌 Future Improvements
+
+- 🔁 Pagination and infinite scroll for watchlist and movie results
+- 🔥 Switch to Supabase or Planetscale for real-time + relational DB
+- 🧠 Use `react-query` or `tanstack` for data fetching and caching
+- 🎨 Add toasts for UX feedback (e.g., success/error messages)
+- 🌍 Multi-language support + genre filters
+
+
+---
+
+## 🧠 Developer Notes & Attention to Detail
+
+This project was crafted with careful attention to **UX, UI polish, and developer best practices**, including:
+
+- 🎯 **Debounced search input** using `use-debounce` to reduce unnecessary API calls and provide smooth UX while typing
+- 🎨 **Smooth loading experience** powered by `react-loading-skeleton`, ensuring the UI doesn't jump or flicker during data fetches
+- 🖼 **Beautiful movie gallery** with `react-image-gallery` to browse high-quality movie backdrops
+- 🧭 **Dynamic breadcrumbs** powered by Zustand store state and Next Router, adjusting to search and navigation context
+- 💾 **Optimistic UI updates** using Zustand: watchlist updates are immediate in the UI, while syncing to Firestore in the background
+- 📦 **Modular component structure** for scalability and reusability
+
+This level of polish is what transforms a functional app into a professional-grade user experience.
+
+
+
+---
+
+## 💡 Final Thoughts
+
+Next Movie V1 is a polished, modern React + Firebase application built for performance and modularity. It's a great base to expand into a complete movie tracking, rating, and social sharing platform.
+
+Built with ❤️ using Next.js 15, Tailwind, Zustand, and Firebase.
+
+---

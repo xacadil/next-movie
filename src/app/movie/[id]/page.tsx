@@ -32,9 +32,6 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
 
 
     return (
-        
-            
-        
         <div className="max-w-6xl mx-auto px-4 py-8">
                 <Breadcrumb currentTitle={movie.title} />
             {/* Movie Info */}
