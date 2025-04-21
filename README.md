@@ -4,6 +4,10 @@
 
 Welcome to **Next Movie**, a modern movie discovery app powered by **Next.js 15 (App Router)** and **Firebase**. This project enables users to browse popular and top-rated movies, perform live search queries, and manage a personal watchlist—all with a polished, fast-reacting interface using **Zustand**, **Tailwind CSS**, and **TypeScript**.
 
+![App Screenshot](https://i.postimg.cc/4mR5ZwnF/temp-Imageczhg-IO.avif)
+![App Screenshot](https://i.postimg.cc/18HMv6m7/temp-Image9-Aay4a.avif)
+
+
 ---
 
 ## 🚀 Features
@@ -54,6 +58,43 @@ src/
 
 ---
 
+
+## ▶️ Running the App
+
+Follow these steps to run the app locally:
+
+### 1. Clone the Repository
+```bash
+git clone https://github.com/your-username/next-movie.git
+cd next-movie
+```
+
+### 2. Install Dependencies
+```bash
+npm install
+```
+
+### 3. Set Up Environment Variables
+Create a `.env.local` file in the root directory and add the following environment variables:
+
+```env
+NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key
+NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
+NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET=your_project.appspot.com
+NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID=your_messaging_sender_id
+NEXT_PUBLIC_FIREBASE_APP_ID=your_firebase_app_id
+```
+
+### 4. Run the Development Server
+```bash
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to view the app in the browser.
+
+---
 ## 🧪 Running Playwright Tests
 
 To run the end-to-end tests:
