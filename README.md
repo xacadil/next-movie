@@ -65,7 +65,7 @@ Follow these steps to run the app locally:
 
 ### 1. Clone the Repository
 ```bash
-git clone https://github.com/your-username/next-movie.git
+git clone https://github.com/xacadil/next-movie
 cd next-movie
 ```
 
