@@ -56,7 +56,7 @@ export default async function MoviePage({ params }: { params: { id: string } }) 
                 <div className="flex-1 space-y-4">
                     <h1 className="text-3xl font-bold text-yellow-500">{movie.title}</h1>
                     <p className="text-white ">{movie.overview}</p>
-                    <AddToWatchlist movie={{ id: movie.id, title: movie.title }} />
+                    <AddToWatchlist movie={{ id: movie.id, title: movie.title, poster_path: movie.poster_path }} />
                     <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-white">
                         {movie.runtime && (
                             <p className="flex items-center gap-2">

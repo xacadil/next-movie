@@ -11,6 +11,7 @@ import { useRouter } from "next/navigation";
 
 interface Props {
     movie: {
+        poster_path: null;
         id: number;
         title: string;
     };
@@ -45,6 +46,7 @@ export default function AddToWatchlist({ movie }: Props) {
             addToWatchlist({
                 id: movie.id,
                 title: movie.title,
+                poster_path: movie.poster_path ?? "null",
             });
         }
 
@@ -56,6 +58,7 @@ export default function AddToWatchlist({ movie }: Props) {
                 await setDoc(docRef, {
                     id: movie.id,
                     title: movie.title,
+                    poster_path: movie.poster_path ?? null,
                     addedAt: Date.now(),
                 });
             }
