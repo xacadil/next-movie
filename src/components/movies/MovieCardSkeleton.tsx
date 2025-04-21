@@ -1,5 +1,10 @@
 import Skeleton from "react-loading-skeleton";
 
+/**
+ * A loading skeleton for a MovieCard, mimicking the layout
+ * with loading skeletons for the image, title, genres, and
+ * ratings.
+ */
 export default function MovieCardSkeleton() {
     return (
         <div className="max-w-sm bg-white border border-gray-200 rounded-lg shadow-sm p-4">

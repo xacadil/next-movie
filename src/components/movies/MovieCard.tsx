@@ -5,6 +5,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { Star } from 'lucide-react';
 
+/**
+ * A component that renders a single movie item with a poster image, title,
+ * average rating, and a brief description. The component is a link to the
+ * movie details page.
+ *
+ * @param {Movie} movie - the movie object data
+ * @returns {JSX.Element} a single movie item component
+ */
 export default function MovieCard({ movie }: { movie: Movie }) {
     const poster = movie.poster_path
         ? `${process.env.NEXT_PUBLIC_IMAGE_BASE_URL}${movie.poster_path}`

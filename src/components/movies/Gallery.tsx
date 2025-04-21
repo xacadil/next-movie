@@ -6,6 +6,19 @@ interface Backdrop {
     file_path: string;
 }
 
+/**
+ * Renders a gallery component using an array of backdrops. Each backdrop is 
+ * displayed as an image with a corresponding thumbnail. The gallery includes 
+ * features such as play button, fullscreen button, and navigation controls.
+ * 
+ * @param {Object} props - The properties object.
+ * @param {Backdrop[]} props.backdrops - An array of backdrop objects, each 
+ * containing a `file_path` string used to construct image URLs.
+ * 
+ * @returns {JSX.Element | null} A JSX element representing the image gallery 
+ * or null if no backdrops are provided.
+ */
+
 export default function Gallery({ backdrops }: { backdrops: Backdrop[] }) {
     if (!backdrops || backdrops.length === 0) return null;
 

@@ -12,6 +12,18 @@ const authHeader = {
     "Content-Type": "application/json",
 };
 
+/**
+ * Fetches a list of movies from the TMDB API based on the provided options.
+ * 
+ * @param {Object} options - Query parameters for fetching the movies.
+ * @param {string} [options.language=en-US] - Language code for the results.
+ * @param {string} [options.include_adult=false] - Whether to include adult content.
+ * @param {string} [options.sort_by=primary_release_date.desc] - Sorting criteria for the results.
+ * @param {string} [options.page=1] - Page number for pagination.
+ * @returns {Promise<Object>} A promise that resolves to the JSON response containing the list of movies.
+ * @throws Will throw an error if the fetch operation fails.
+ */
+
 export async function discoverMovies(options = {}) {
     const params = new URLSearchParams({
         language: "en-US",
@@ -29,6 +41,15 @@ export async function discoverMovies(options = {}) {
 
     return response.json();
 }
+
+/**
+ * Searches for movies using the TMDB API based on the provided query.
+ * 
+ * @param {string} query - The search term to query movies.
+ * @param {number} [page=1] - The page of results to retrieve for pagination.
+ * @returns {Promise<Object>} A promise that resolves to the JSON response containing the search results.
+ * @throws Will throw an error if the search operation fails.
+ */
 
 export async function searchMovies(query: string, page = 1) {
     if (!query) return { results: [] };
@@ -48,6 +69,13 @@ export async function searchMovies(query: string, page = 1) {
     return response.json();
 }
 
+/**
+ * Fetches a movie's details from the TMDB API.
+ * 
+ * @param {string} id - The ID of the movie to fetch.
+ * @returns {Promise<Object | null>} A promise that resolves to the movie's details or null if the fetch failed.
+ * @throws Will throw an error if the fetch operation fails.
+ */
 export async function getMovieDetails(id: string) {
     const res = await fetch(`https://api.themoviedb.org/3/movie/${id}?language=en-US`, {
         headers: {

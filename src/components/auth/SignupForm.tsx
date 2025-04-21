@@ -12,12 +12,29 @@ export default function SignupForm() {
     const [password, setPassword] = useState("");
     const [error, setError] = useState("");
 
+    /**
+     * Returns an error message if the form data is invalid.
+     * Validations:
+     * - Email must contain an @ symbol.
+     * - Password must be at least 6 characters.
+     * @returns {string|null} An error message or null if the form data is valid.
+     */
     const validate = () => {
         if (!email.includes("@")) return "Please enter a valid email address.";
         if (password.length < 6) return "Password must be at least 6 characters.";
         return null;
     };
 
+    /**
+     * Handles the form submission and registers the user if the form data is valid.
+     * 
+     * The form data is validated by calling the `validate` function.
+     * If the form data is invalid, it sets the `error` state with an appropriate error message.
+     * If the form data is valid, it calls the `register` function from the `useAuth` hook to register the user.
+     * If the registration is successful, it redirects the user to the root path.
+     * If there is an error, it sets the `error` state with the error message.
+     * @param {React.FormEvent} e The form submission event.
+     */
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const validationError = validate();

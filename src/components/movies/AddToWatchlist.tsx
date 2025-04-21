@@ -17,6 +17,20 @@ interface Props {
     };
 }
 
+/*************  ✨ Windsurf Command ⭐  *************/
+/**
+ * Component that allows users to add or remove a movie from their watchlist.
+ * 
+ * If the user is not authenticated, they are redirected to the login page.
+ * The component optimistically updates the UI by adding/removing the movie
+ * from the local watchlist state and then synchronizes the change with Firestore.
+ * 
+ * @param {Object} movie - The movie object containing id, title, and poster_path.
+ * 
+ * @returns A button that toggles the movie's presence in the user's watchlist.
+ */
+
+/*******  9f067abd-f9d1-439b-8aa1-297cef8a860e  *******/
 export default function AddToWatchlist({ movie }: Props) {
     const { user } = useAuth();
     const router = useRouter();
@@ -31,6 +45,15 @@ export default function AddToWatchlist({ movie }: Props) {
 
     const isInWatchlist = watchlist.some((m) => m.id === movie.id);
 
+    /**
+     * Toggles the movie's presence in the user's watchlist.
+     * 
+     * If the user is not authenticated, redirects them to the login page.
+     * Optimistically updates the UI by adding/removing the movie
+     * from the local watchlist state and then synchronizes the change with Firestore.
+     * If the Firestore sync fails, an error is logged to the console and the UI
+     * is not reverted.
+     */
     const handleToggle = async () => {
         if (!user) {
             router.push("/login");

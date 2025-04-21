@@ -10,6 +10,16 @@ interface Actor {
     profile_path: string | null;
 }
 
+/**
+ * A component that displays a list of actors from a movie.
+ *
+ * The component will only show up to 5 actors by default. If there are more than 5 actors, it
+ * will show a checkbox to toggle showing all actors.
+ *
+ * @param {Object} props
+ * @param {Actor[]} props.actors - An array of actors
+ * @returns {JSX.Element}
+ */
 export default function ActorList({ actors }: { actors: Actor[] }) {
     const [showAll, setShowAll] = useState(false);
 

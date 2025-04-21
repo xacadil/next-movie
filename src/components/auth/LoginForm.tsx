@@ -5,6 +5,12 @@ import { useState } from "react";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useRouter } from "next/navigation";
 
+    /**
+     * Renders a login form component.
+     *
+     * Handles form submission, including validation of the email and password,
+     * and redirects to the home page on success.
+     */
 export default function LoginForm() {
     const { login } = useAuth();
     const router = useRouter();
@@ -18,6 +24,13 @@ export default function LoginForm() {
         return null;
     };
 
+    /**
+     * Handles login form submission.
+     *
+     * Validates the form inputs, attempts to log in using the email and password,
+     * and redirects to the home page on success.
+     * @param {React.FormEvent} e - The form submission event.
+     */
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const validationError = validate();
