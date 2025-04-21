@@ -2,7 +2,7 @@
 import { create } from "zustand";
 import { Movie, WatchlistItem } from "@/types/movie";
 
-type SortType = "popular" | "release_year_asc" | "top_rated" | "release_year_desc";
+ export type SortType = "popular" | "release_year_asc" | "top_rated" | "release_year_desc";
 
 interface MovieStore {
     searchQuery: string;

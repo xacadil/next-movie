@@ -1,7 +1,7 @@
 // components/movies/AddToWatchlist.tsx
 "use client";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { Bookmark, BookmarkX } from "lucide-react";
 import { useAuth } from "@/lib/hooks/useAuth";
 import { useMovieStore } from "@/lib/store";

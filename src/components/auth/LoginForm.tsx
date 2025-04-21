@@ -28,8 +28,9 @@ export default function LoginForm() {
         try {
             await login(email, password);
             router.push("/"); //redirect on success
-        } catch (err: any) {
-            setError(err.message);
+        } catch (err) {
+            if (err instanceof Error) setError(err.message);
+            else setError("Something went wrong");
         }
     };
 

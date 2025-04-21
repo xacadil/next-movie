@@ -1,6 +1,6 @@
 "use client";
 
-import { useMovieStore } from "@/lib/store";
+import { useMovieStore, SortType } from "@/lib/store";
 import { ArrowDown, ArrowUp } from "lucide-react"; // Install if not already
 
 const sortOptions = [
@@ -34,7 +34,7 @@ export default function SortButtonGroup() {
             {sortOptions.map(({ label, value }) => (
                 <button
                     key={String(value)}
-                    onClick={() => setSortType(value as any)}
+                    onClick={() => setSortType(value as SortType)}
                     className={`cursor-pointer inline-flex items-center px-4 py-2 text-sm font-medium border rounded ${sortType === value
                             ? "bg-blue-700 text-white border-blue-700"
                             : "bg-white text-gray-900 border-gray-300 hover:bg-blue-700 hover:text-white"

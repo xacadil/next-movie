@@ -111,6 +111,28 @@ This level of polish is what transforms a functional app into a professional-gra
 
 
 
+
+---
+
+## ⚙️ How This Project Leverages Next.js Optimally
+
+This project takes full advantage of **Next.js 15 features** to improve performance, structure, and developer experience:
+
+- ⚡ **Server components** for movie detail pages to pre-render multiple API requests
+- ⏱️ **Parallel data fetching** via `Promise.all()` to speed up server responses
+- 📦 **Zustand client store** to handle watchlist state without prop drilling or overfetching
+- 🧭 **Route grouping** and layout components for clean structure and shared UI
+- 🪄 **Dynamic breadcrumbs** that update based on store and router state
+- 🧱 **Incremental Static Regeneration (ISR)** potential for caching and background revalidation
+- 💫 **Next.js `<Image>` optimization** for poster rendering and responsive layout
+- 🧪 **Playwright testing integration** for verifying all routes and functionality
+- 🌍 **Edge runtime ready** for future global performance tuning
+- 🧼 **Strict server/client separation** to prevent hydration mismatch and reduce JS size
+
+These strategies ensure the app loads fast, works great on slow connections, and scales efficiently for future features.
+
+
+
 ---
 
 ## 💡 Final Thoughts

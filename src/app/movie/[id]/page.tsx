@@ -14,18 +14,23 @@ import {
     Globe,
     Languages,
     BadgeCheck,
-    Tags,
     Building2,
     PackageOpen,
 } from "lucide-react";
 import AddToWatchlist from "@/components/movies/AddToWatchlist";
 import Breadcrumb from "@/components/layout/BreadCrumb";
 
-export default async function MoviePage({ params }: { params: { id: string } }) {
+
+export default async function Page({
+    params,
+}: {
+    params: Promise<{ id: string }>;
+}) {
+    const { id } = await params;
     const [movie, cast, images] = await Promise.all([
-        getMovieDetails(params.id),
-        getMovieCredits(params.id),
-        getMovieImages(params.id),
+        getMovieDetails(id),
+        getMovieCredits(id),
+        getMovieImages(id),
     ]);
 
     if (!movie) return notFound();

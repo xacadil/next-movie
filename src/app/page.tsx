@@ -16,7 +16,6 @@ export default function HomePage() {
     loading,
     setLoading,
     page,
-    totalPages,
     setTotalPages,
     sortType,
   } = useMovieStore();
@@ -49,7 +48,7 @@ export default function HomePage() {
     };
 
     fetchMovies();
-  }, [searchQuery, sortType, page]);
+  }, [searchQuery, sortType, page, setLoading, setMovies, setTotalPages]);
 
   useEffect(() => {
     let timeout: NodeJS.Timeout;

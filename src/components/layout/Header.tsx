@@ -44,7 +44,7 @@ export default function Header() {
         }
 
         fetchMovies();
-    }, [debouncedQuery]);
+    }, [debouncedQuery, setLoading, setMovies]);
 
     return (
         <header className="bg-white shadow-sm">

@@ -2,7 +2,7 @@
 
 import { useMovieStore } from "@/lib/store";
 import { useRouter } from "next/navigation";
-import { Home, Search } from "lucide-react";
+import { Home } from "lucide-react";
 
 interface BreadcrumbProps {
     currentTitle: string;
@@ -56,7 +56,7 @@ export default function Breadcrumb({ currentTitle }: BreadcrumbProps) {
                                 onClick={() => router.back()}
                                 className="cursor-pointer inline-flex items-1 text-sm font-medium text-gray-700 hover:text-blue-600 md:ms-2 dark:text-gray-400 dark:hover:text-white"
                             >
-                                Search: <span className="italic">"{searchQuery}"</span>
+                                Search: <span className="italic">{searchQuery}</span>
                             </button>
                         </div>
                     </li>
