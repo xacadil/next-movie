@@ -78,7 +78,10 @@ npm install
 Create a `.env.local` file in the root directory and add the following environment variables:
 
 ```env
-NEXT_PUBLIC_TMDB_API_KEY=your_tmdb_api_key
+NEXT_PUBLIC_IMAGE_BASE_URL="https://image.tmdb.org/t/p/w500"
+NEXT_PUBLIC_IMAGE_ORIGINAL_URL="https://image.tmdb.org/t/p/original"
+NEXT_PUBLIC_IMAGE_THUMB_URL="https://image.tmdb.org/t/p/w185"
+TMDB_ACCESS_TOKEN=your_tmdb_access_token
 NEXT_PUBLIC_FIREBASE_API_KEY=your_firebase_api_key
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=your_project.firebaseapp.com
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=your_project_id
